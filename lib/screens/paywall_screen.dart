@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:purchases_flutter/purchases_flutter.dart';
 import 'package:in_app_review/in_app_review.dart';
+import 'package:url_launcher/url_launcher.dart';
 import '../services/purchase_service.dart';
 
 class PaywallScreen extends StatefulWidget {
@@ -133,6 +134,17 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     child: const Text('Restore Purchases'),
                   ),
                   const SizedBox(height: 12),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      _buildFooterLink('Terms of Use', 'https://GHwyever.github.io/100zw/terms.html'),
+                      const Text(' | ', style: TextStyle(color: Colors.grey)),
+                      _buildFooterLink('EULA', 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'),
+                      const Text(' | ', style: TextStyle(color: Colors.grey)),
+                      _buildFooterLink('Privacy Policy', 'https://GHwyever.github.io/100zw/privacy.html'),
+                    ],
+                  ),
+                  const SizedBox(height: 12),
                   TextButton(
                     onPressed: () => Navigator.pop(context),
                     child: Text(
@@ -143,6 +155,29 @@ class _PaywallScreenState extends State<PaywallScreen> {
                 ],
               ),
             ),
+    );
+  }
+
+  Widget _buildFooterLink(String text, String url) {
+    return GestureDetector(
+      onTap: () async {
+        final uri = Uri.parse(url);
+        if (await canLaunchUrl(uri)) {
+          await launchUrl(uri);
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text('Could not launch $url')),
+          );
+        }
+      },
+      child: Text(
+        text,
+        style: TextStyle(
+          color: Colors.grey[600],
+          fontSize: 12,
+          decoration: TextDecoration.underline,
+        ),
+      ),
     );
   }
 }
