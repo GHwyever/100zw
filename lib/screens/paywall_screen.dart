@@ -134,13 +134,14 @@ class _PaywallScreenState extends State<PaywallScreen> {
                     child: const Text('Restore Purchases'),
                   ),
                   const SizedBox(height: 12),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
+                  Wrap(
+                    alignment: WrapAlignment.center,
+                    spacing: 4,
                     children: [
                       _buildFooterLink('Terms of Use', 'https://GHwyever.github.io/100zw/terms.html'),
-                      const Text(' | ', style: TextStyle(color: Colors.grey)),
-                      _buildFooterLink('EULA', 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'),
-                      const Text(' | ', style: TextStyle(color: Colors.grey)),
+                      const Text('|', style: TextStyle(color: Colors.grey)),
+                      _buildFooterLink('Apple EULA', 'https://www.apple.com/legal/internet-services/itunes/dev/stdeula/'),
+                      const Text('|', style: TextStyle(color: Colors.grey)),
                       _buildFooterLink('Privacy Policy', 'https://GHwyever.github.io/100zw/privacy.html'),
                     ],
                   ),
